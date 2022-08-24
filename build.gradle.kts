@@ -27,6 +27,15 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                // Netty Dependencies
+                val nettyVersion: String by project
+                implementation("io.netty:netty-handler:$nettyVersion")
+                implementation("io.netty:netty-buffer:$nettyVersion")
+
+                // Blaze Dependencies
+                val blazeVersion: String by project
+                implementation("com.jacobtread.blaze:blaze-core:$blazeVersion")
+                implementation("com.jacobtread.blaze:blaze-annotations:$blazeVersion")
             }
         }
         val jvmTest by getting
@@ -35,7 +44,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "Main"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "PocketRelayClient"
